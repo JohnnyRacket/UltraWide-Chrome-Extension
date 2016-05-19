@@ -8,10 +8,16 @@
     "scripts": ["background.js"],
     "persistent": false
   },
+  "content_scripts": [
+    {
+      "matches": ["http://kissanime.to/*","https://kissanime.to/*"],
+      "js": ["kissanime.js"]
+    }
+  ],
   "commands": {
           "toggle-feature-foo": {
             "suggested_key": {
-              "default": "Ctrl+Shift+Y"
+              "default": "Ctrl+Shift+K"
             },
             "description": "Toggle Screen",
             "global": true
