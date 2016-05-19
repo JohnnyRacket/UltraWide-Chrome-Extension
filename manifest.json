@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["http://kissanime.to/*","https://kissanime.to/*"],
-      "js": ["kissanime.js"]
+      "js": ["websites/kissanime.js"]
     }
   ],
   "commands": {
@@ -30,6 +30,7 @@
   },
   "permissions": [
     "activeTab",
+    "system.display",
     "https://ajax.googleapis.com/"
   ]
 }
