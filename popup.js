@@ -55,14 +55,22 @@ function notifyContentScript(){
 //activate on popup clicked
 document.addEventListener('DOMContentLoaded', function() {
   var _selector = document.querySelector('input[type=checkbox]');
+  chrome.storage.local.get('checked', function(items){
+    if(items.checked){
+      _selector.checked = items.checked;
+    }
+  })
+  var _selector = document.querySelector('input[type=checkbox]');
    _selector.addEventListener('change', function (event) {
        if (_selector.checked) {
+         chrome.storage.local.set({'checked': true});
          var queryInfo = {
              active: true,
              currentWindow: true
            };
          chrome.tabs.query(queryInfo, getViewportSize);
        } else {
+         chrome.storage.local.set({'checked': false});
          chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
            chrome.tabs.sendMessage(tabs[0].id, {height: 0, width: 0});
            // do something else otherwise

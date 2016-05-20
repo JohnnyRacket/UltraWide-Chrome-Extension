@@ -31,6 +31,7 @@
   "permissions": [
     "activeTab",
     "system.display",
+    "storage",
     "https://ajax.googleapis.com/"
   ]
 }
