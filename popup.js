@@ -42,23 +42,33 @@ console.log("screen height is: " + SystemInformation.viewportHeight);
   }
   chrome.windows.update(windowId, updateInfo, notifyContentScript);
 }
-function notifyContentScript(height, width){
+function notifyContentScript(){
   console.log("blorping website: ");
   //for basic coding lets assume it checks that is is kissanime
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-  chrome.tabs.sendMessage(tabs[0].id, {height: SystemInformation.viewportHeight, width: SystemInformation.viewportWidth}, function(response) {
-    console.log(response.farewell);
+    chrome.tabs.sendMessage(tabs[0].id, {height: SystemInformation.viewportHeight, width: SystemInformation.viewportWidth}, function(response) {
+    console.log("response");
   });
 });
 }
 
 //activate on popup clicked
 document.addEventListener('DOMContentLoaded', function() {
+  var _selector = document.querySelector('input[type=checkbox]');
+   _selector.addEventListener('change', function (event) {
+       if (_selector.checked) {
+         var queryInfo = {
+             active: true,
+             currentWindow: true
+           };
+         chrome.tabs.query(queryInfo, getViewportSize);
+       } else {
+         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+           chrome.tabs.sendMessage(tabs[0].id, {height: 0, width: 0});
+           // do something else otherwise
+         });
+       }
+   });
   //set to max res
-  var queryInfo = {
-      active: true,
-      currentWindow: true
-    };
-  chrome.tabs.query(queryInfo, getViewportSize);
 
 });

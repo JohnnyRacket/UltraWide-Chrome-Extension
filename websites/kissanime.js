@@ -26,9 +26,10 @@ function setDefaults(){
 }
 //sets the video player back to deafult values
 function restoreDefaults(){
-  WebsiteInformation.videoPlayer.style.height = WebsiteInformation.videoPlayerHeight + "px"; // the 20 is for scrollbar
-  WebsiteInformation.videoPlayer.style.width = WebsiteInformation.videoPlayerWidth + "px";
+  WebsiteInformation.videoPlayer.style.height = WebsiteInformation.videoPlayerHeight; // the 20 is for scrollbar
+  WebsiteInformation.videoPlayer.style.width = WebsiteInformation.videoPlayerWidth;
   WebsiteInformation.videoPlayer.style.zIndex =  WebsiteInformation.videoPlayerzIndex ;
+  document.body.style.overflow = "visible";
 }
 
 chrome.runtime.onMessage.addListener(
@@ -36,7 +37,11 @@ chrome.runtime.onMessage.addListener(
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    bloatVideo(request.width, request.height);
+    if(request.width !== 0 && request.height !== 0 ){
+      bloatVideo(request.width, request.height);
+    }else{
+      restoreDefaults();
+    }
     if (request.greeting == "hello"){
       sendResponse({farewell: "goodbye"});
     }
