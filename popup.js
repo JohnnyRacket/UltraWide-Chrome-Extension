@@ -2,7 +2,7 @@ var SystemInformation = SystemInformation || {};
 SystemInformation.scrollBarWidth = 17; //seems to be standard and I cant find a way to calc it otf yet
 
 function getViewportSize(tabs){
-  SystemInformation.viewportHeight = tabs[0].height - SystemInformation.scrollBarWidth;
+  SystemInformation.viewportHeight = tabs[0].height;
   chrome.system.display.getInfo(setScreenSize);
 }
 
@@ -31,7 +31,7 @@ function downsizeScreen(window){
 //will have to add some to account for scroll bars and myabe other pixels
 console.log("screen height is: " + SystemInformation.viewportHeight);
   SystemInformation.viewportWidth = Math.floor(((SystemInformation.viewportHeight) * 16/9)); //right now only supports landscape things... 17 is scrollbar size
-  SystemInformation.browserWidth = SystemInformation.viewportWidth + SystemInformation.scrollBarWidth*2; // still nto sure why its scrollbar*2 and not just a single
+  SystemInformation.browserWidth = SystemInformation.viewportWidth + SystemInformation.scrollBarWidth; // still nto sure why its scrollbar*2 and not just a single
   console.log("adjusted width = " + SystemInformation.viewportWidth);
   updateInfo = {
     left: SystemInformation.screenWidth - SystemInformation.browserWidth + 10, //dunno why its 10 pixels off yet
