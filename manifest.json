@@ -16,6 +16,10 @@
     {
       "matches": ["http://kissanime.to/*","https://kissanime.to/*"],
       "js": ["websites/kissanime.js"]
+    },
+    {
+      "matches": ["http://www.youtube.com/*","https://www.youtube.com/*"],
+      "js": ["websites/youtube.js"]
     }
   ],
   "commands": {
