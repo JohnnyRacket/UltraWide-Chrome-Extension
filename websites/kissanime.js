@@ -10,39 +10,19 @@ function bloatVideo(width, height){
   WebsiteInformation.videoPlayer.style.height = height + "px"; // the 20 is for scrollbar
   WebsiteInformation.videoPlayer.style.width = width + "px";
   WebsiteInformation.videoPlayer.style.zIndex =  "999";
-  window.scroll(2000,0);
+
+  movePage();
+
+  console.log("video bloated");
+}
+
+function movePage(){
+  //alert(findPosX(WebsiteInformation.videoPlayer));
+  window.scroll(findPosX(WebsiteInformation.videoPlayer),0);
   location.href = "#";
   location.href = "#my_video_1";
   document.body.style.overflow = "hidden";
-
-  //document.body.scrollRight += 2000;
-  console.log("video bloated");
+  //alert(findPosX(WebsiteInformation.videoPlayer));
+  window.scroll(findPosX(WebsiteInformation.videoPlayer),0);
+  location.href = "#my_video_1"; //this is not graceful, but right now it has to exist unfortunately
 }
-//gets the default values from the video player
-function setDefaults(){
-  WebsiteInformation.videoPlayerHeight = WebsiteInformation.videoPlayer.style.height;
-  WebsiteInformation.videoPlayerWidth = WebsiteInformation.videoPlayer.style.width;
-  WebsiteInformation.videoPlayerzIndex = WebsiteInformation.videoPlayer.style.zIndex;
-}
-//sets the video player back to deafult values
-function restoreDefaults(){
-  WebsiteInformation.videoPlayer.style.height = WebsiteInformation.videoPlayerHeight; // the 20 is for scrollbar
-  WebsiteInformation.videoPlayer.style.width = WebsiteInformation.videoPlayerWidth;
-  WebsiteInformation.videoPlayer.style.zIndex =  WebsiteInformation.videoPlayerzIndex ;
-  document.body.style.overflow = "visible";
-}
-
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    if(request.width !== 0 && request.height !== 0 ){
-      bloatVideo(request.width, request.height);
-    }else{
-      restoreDefaults();
-    }
-    if (request.greeting == "hello"){
-      sendResponse({farewell: "goodbye"});
-    }
-  });
