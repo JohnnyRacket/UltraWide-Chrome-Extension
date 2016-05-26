@@ -1,6 +1,5 @@
 //weebs everywhere
 var WebsiteInformation = WebsiteInformation || {};
-WebsiteInformation.videoPlayer = document.getElementById("my_video_1");
 
 console.log("kissanime script loaded");
 function bloatVideo(width, height){

@@ -1,4 +1,5 @@
 var WebsiteInformation = WebsiteInformation || {};
+WebsiteInformation.videoPlayer = document.getElementsByTagName("video")[0];
 
 function setDefaults(){
   WebsiteInformation.videoPlayerHeight = WebsiteInformation.videoPlayer.style.height;

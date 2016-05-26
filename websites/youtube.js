@@ -1,5 +1,5 @@
 var WebsiteInformation = WebsiteInformation || {};
-WebsiteInformation.videoPlayer = document.getElementsByClassName("player-api")[0];
+//WebsiteInformation.videoPlayer = document.getElementsByClassName("player-api")[0];
 
 function bloatVideo(width, height){
   setDefaults();
