@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Psuedo Fullscreen",
+  "name": "Pseudo Fullscreen",
   "description": "Fullscreen a video within the limits of your browser to maximize screen efficiency",
   "version": "1.0",
   "background": {

@@ -12,10 +12,10 @@ function resizeVideo(width, height){
 }
 function resizeWrapper(width, height){
   for (var i = 0; i < WebsiteInformation.resize.length; ++i) {
-    var resize = WebsiteInformation.resize[i];
-    resize.style.height = height + "px";
-    resize.style.width = width + "px";
-    resize.style.zIndex = 1000;
+    var obj = WebsiteInformation.resize[i];
+    obj.style.height = height + "px";
+    obj.style.width = width + "px";
+    obj.style.zIndex = 1000;
   }
 }
 //resizes controls that arent the video itself, these are defined in the specific website files
@@ -39,27 +39,42 @@ function movePage(){
 }
 //sets the default values for when you want to un-fullscreen
 function setDefaults(){
-  WebsiteInformation.videoPlayer.height = WebsiteInformation.videoPlayer.style.height;
-  WebsiteInformation.videoPlayer.width = WebsiteInformation.videoPlayer.style.width;
-  WebsiteInformation.videoPlayer.zIndex = WebsiteInformation.videoPlayer.style.zIndex;
+  WebsiteInformation.videoPlayer.presets = {};
+  WebsiteInformation.videoPlayer.presets.height = WebsiteInformation.videoPlayer.style.height;
+  WebsiteInformation.videoPlayer.presets.width = WebsiteInformation.videoPlayer.style.width;
+  WebsiteInformation.videoPlayer.presets.zIndex = WebsiteInformation.videoPlayer.style.zIndex;
+
+  for (var i = 0; i < WebsiteInformation.resize.length; ++i) {
+    var obj = WebsiteInformation.resize[i];
+    obj.presets = {};
+    obj.presets.height = obj.style.height;
+    obj.presets.width = obj.style.width;
+    obj.presets.zIndex = obj.style.zIndex;
+  }
+
+  for (var i = 0; i < WebsiteInformation.bringForward.length; ++i) {
+    var obj = WebsiteInformation.bringForward[i];
+    obj.presets = {};
+    obj.presets.zIndex = obj.style.zIndex;
+  }
 }
 //sets the video player back to deafult values
 function restoreDefaults(){
-  WebsiteInformation.videoPlayer.style.height = WebsiteInformation.videoPlayerHeight; // the 20 is for scrollbar
-  WebsiteInformation.videoPlayer.style.width = WebsiteInformation.videoPlayerWidth;
-  WebsiteInformation.videoPlayer.style.zIndex =  WebsiteInformation.videoPlayerzIndex ;
+  WebsiteInformation.videoPlayer.style.height = WebsiteInformation.videoPlayer.presets.height; // the 20 is for scrollbar
+  WebsiteInformation.videoPlayer.style.width = WebsiteInformation.videoPlayer.presets.width;
+  WebsiteInformation.videoPlayer.style.zIndex =  WebsiteInformation.videoPlayer.presets.zIndex ;
 
   //restore wrappers
   for (var i = 0; i < WebsiteInformation.resize.length; ++i) {
-    var resize = WebsiteInformation.resize[i];
-    resize.style.height = WebsiteInformation.videoPlayer.height + "px";
-    resize.style.width = WebsiteInformation.videoPlayer.width + "px";
-    resize.style.zIndex = WebsiteInformation.videoPlayer.zIndex + 1;
+    var obj = WebsiteInformation.resize[i];
+    obj.style.height = obj.presets.height;
+    obj.style.width = obj.presets.width;
+    obj.style.zIndex = obj.presets.zIndex;
   }
   //push back things
   for (var i = 0; i < WebsiteInformation.bringForward.length; ++i) {
     var obj = WebsiteInformation.bringForward[i];
-    obj.style.zIndex = WebsiteInformation.videoPlayer.zIndex + 1;
+    obj.style.zIndex = obj.presets.zIndex;
   }
   document.body.style.overflow = "visible";
 }
