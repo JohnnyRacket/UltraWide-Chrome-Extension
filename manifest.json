@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "UltraWide Space",
-  "description": "This extension allows you to save the space from black bars and use it for other things",
+  "name": "Psuedo Fullscreen",
+  "description": "Fullscreen a video within the limits of your browser to maximize screen efficiency",
   "version": "1.0",
   "background": {
     "scripts": ["background.js"],
